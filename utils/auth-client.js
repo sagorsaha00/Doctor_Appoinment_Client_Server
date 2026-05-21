@@ -1,6 +1,6 @@
 import { createAuthClient } from "better-auth/react"
 export const authClient = createAuthClient({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://doctor-appoinment-client-server.vercel.app",
 })
 
 export const { signIn, signUp, signOut, useSession, getSession } = createAuthClient()
