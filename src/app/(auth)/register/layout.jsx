@@ -1,10 +1,10 @@
-'use client";'
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import Header from "../../../../components/header";
 import Footer from "../../../../components/footer";
 import { useSession } from "../../../../utils/auth-client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function Layout({ children }) {
   const { data: session } = useSession();
@@ -15,11 +15,12 @@ export default function Layout({ children }) {
       router.push("/home");
     }
   }, [session, router]);
+
   return (
     <>
-      <Header></Header>
+      <Header />
       {children}
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
