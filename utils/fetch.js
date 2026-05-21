@@ -1,5 +1,5 @@
 export async function getData() {
-    const response = await fetch("http://localhost:3001/allDoctorList", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/allDoctorList`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export async function getData() {
 
 export async function getSingleData(id) {
     console.log("id",id)
-    const response = await fetch(`http://localhost:3001/doctor/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/doctor/${id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

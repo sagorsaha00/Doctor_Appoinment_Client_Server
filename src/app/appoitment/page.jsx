@@ -18,7 +18,7 @@ export default function AppointmentForm() {
   useEffect(() => {
     async function loadDoctors() {
       try {
-        const res = await fetch("http://localhost:3001/allDoctorList");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/allDoctorList`);
         const data = await res.json();
         setDoctors(data.data || []);
       } catch (err) {
@@ -46,7 +46,7 @@ export default function AppointmentForm() {
       appointmentTime: form.appointmentTime,
     };
 
-    await fetch("http://localhost:3001/CreateAppoinmentUser", {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/CreateAppoinmentUser`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

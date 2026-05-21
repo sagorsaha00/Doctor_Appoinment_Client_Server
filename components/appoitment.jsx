@@ -30,7 +30,7 @@ export default function AppointmentForm({ doctor }) {
     };
       console.log("payload", payload);
     try {
-      await fetch("http://localhost:3001/CreateAppoinmentUser", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/CreateAppoinmentUser`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

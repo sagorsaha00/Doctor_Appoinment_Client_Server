@@ -30,7 +30,7 @@ export default function DashboardProfile() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/getPatientAppoinment?email=${useremail}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/getPatientAppoinment?email=${useremail}`,
         );
 
         const data = await response.json();
@@ -73,7 +73,7 @@ export default function DashboardProfile() {
 
   const handleUpdate = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/updateAppointment/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/updateAppointment/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export default function DashboardProfile() {
   const handleDelete = async (item) => {
     try {
       const itemId = item._id;
-      const res = await fetch(`http://localhost:3001/deleteAppointment/${itemId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/deleteAppointment/${itemId}`, {
         method: "DELETE",
       });
       if (res.ok) {
