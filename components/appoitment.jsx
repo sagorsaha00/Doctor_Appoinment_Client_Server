@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { getToken } from "../utils/getToken";
-import { headers } from "next/headers";
 
 export default function AppointmentForm({ doctor }) {
   const [form, setForm] = useState({
@@ -12,7 +12,7 @@ export default function AppointmentForm({ doctor }) {
     appointmentDate: "",
     appointmentTime: "",
   });
-   const token = getToken(headers());
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -41,12 +41,10 @@ export default function AppointmentForm({ doctor }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-         Authorization: `Bearer ${token}` ,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
-
-      alert("Appointment booked successfully!");
 
       setForm({
         userEmail: "",

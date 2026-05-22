@@ -5,6 +5,7 @@ import Image from "next/image";
 import { authClient, useSession } from "../utils/auth-client";
 import ProfileSection from "../components/update-profile";
 import { Loader } from "../components/loading";
+import { toast } from "react-toastify";
 
 export default function DashboardProfile({ token }) {
   const { data: session } = useSession();
@@ -43,7 +44,7 @@ export default function DashboardProfile({ token }) {
         const data = await response.json();
 
         console.log("data", data);
-
+        
         setAppointments(data.data || []);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -105,6 +106,7 @@ export default function DashboardProfile({ token }) {
             a._id === selectedAppointment._id ? { ...a, ...formData } : a,
           ),
         );
+        toast.success("Appointment updated successfully!");
         setIsModalOpen(false);
       }
     } catch (err) {
@@ -128,6 +130,7 @@ export default function DashboardProfile({ token }) {
       if (res.ok) {
         setAppointments((prev) => prev.filter((a) => a._id !== item._id));
       }
+      toast.success("Appointment deleted successfully!");
     } catch (err) {
       console.error(err);
     }

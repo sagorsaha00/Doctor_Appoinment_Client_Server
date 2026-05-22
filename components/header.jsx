@@ -227,7 +227,11 @@ export default function Header() {
                 duration-300
               "
             >
-              {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+              {mobileOpen ? (
+                <FiX className="cursor-pointer" size={22} />
+              ) : (
+                <FiMenu className="cursor-pointer" size={22} />
+              )}
             </button>
           </div>
         </div>
@@ -268,7 +272,7 @@ export default function Header() {
                 </Link>
               ))}
 
-              {session?.user ? (
+              {/* {session?.user ? (
                 <Link
                   href="/profile"
                   className="
@@ -284,7 +288,7 @@ export default function Header() {
                     duration-300
                   "
                 >
-                  My Profile
+                  Dashboard
                 </Link>
               ) : (
                 <div className="flex flex-col gap-3 mt-3">
@@ -323,7 +327,7 @@ export default function Header() {
                     Register
                   </Link>
                 </div>
-              )}
+              )} */}
             </nav>
           </div>
         )}

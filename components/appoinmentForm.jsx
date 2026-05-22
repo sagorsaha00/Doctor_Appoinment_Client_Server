@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function AppointmentForm({ token }) {
   const [doctors, setDoctors] = useState([]);
@@ -15,7 +16,6 @@ export default function AppointmentForm({ token }) {
     appointmentTime: "",
   });
 
- 
   useEffect(() => {
     async function loadDoctors() {
       try {
@@ -34,7 +34,6 @@ export default function AppointmentForm({ token }) {
     loadDoctors();
   }, []);
 
-  
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -42,7 +41,6 @@ export default function AppointmentForm({ token }) {
     });
   };
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,7 +53,7 @@ export default function AppointmentForm({ token }) {
       appointmentDate: form.appointmentDate,
       appointmentTime: form.appointmentTime,
     };
-
+    toast.success("Appointment booked successfully!");
     console.log("payload", payload);
 
     try {
@@ -76,8 +74,6 @@ export default function AppointmentForm({ token }) {
       const data = await response.json();
 
       console.log(data);
-
-      alert("Appointment booked successfully!");
 
       // reset
       setForm({
@@ -105,7 +101,6 @@ export default function AppointmentForm({ token }) {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-        
           <select
             value={selectedDoctor}
             onChange={(e) => setSelectedDoctor(e.target.value)}
@@ -121,7 +116,6 @@ export default function AppointmentForm({ token }) {
             ))}
           </select>
 
-         
           <input
             type="email"
             name="userEmail"
@@ -132,7 +126,6 @@ export default function AppointmentForm({ token }) {
             required
           />
 
-          
           <input
             type="text"
             name="patientName"
@@ -143,7 +136,6 @@ export default function AppointmentForm({ token }) {
             required
           />
 
-         
           <select
             name="gender"
             value={form.gender}
@@ -158,7 +150,6 @@ export default function AppointmentForm({ token }) {
             <option value="Female">Female</option>
           </select>
 
-          
           <input
             type="text"
             name="phone"
@@ -169,7 +160,6 @@ export default function AppointmentForm({ token }) {
             required
           />
 
-          
           <input
             type="date"
             name="appointmentDate"
@@ -179,7 +169,6 @@ export default function AppointmentForm({ token }) {
             required
           />
 
-          
           <input
             type="time"
             name="appointmentTime"
@@ -189,7 +178,6 @@ export default function AppointmentForm({ token }) {
             required
           />
 
-         
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"

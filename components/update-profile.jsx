@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useSession, authClient } from "../utils/auth-client";
 import { useState, useEffect } from "react";
-
+import { toast } from "react-toastify";
 export default function ProfileSection() {
   const { data: session } = useSession();
   const [name, setName] = useState("");
@@ -27,8 +27,7 @@ export default function ProfileSection() {
       name,
       image,
     });
-
-    alert("Profile updated ✅");
+    toast.success("Profile updated");
   };
 
   if (!session) {
