@@ -91,7 +91,7 @@ export default function TopDoctors() {
                   onClick={() => handleRoute(doc.id)}
                   className="mt-6 cursor-pointer w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium transition-all duration-300"
                 >
-                  Book Appointment
+                  View Details
                   <FiArrowRight />
                 </button>
               </div>
