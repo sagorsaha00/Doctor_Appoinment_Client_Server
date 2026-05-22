@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { signIn, authClient } from "../../../../utils/auth-client";
+import { signIn, authClient, useSession } from "../../../../utils/auth-client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export const signInGoogle = async () => {
   console.log("google calling");
@@ -14,8 +15,16 @@ export const signInGoogle = async () => {
   console.log("Data", data);
 };
 export default function LoginPage() {
+  const { data: session } = useSession();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (session?.user) {
+      router.push("/home");
+    }
+  }, [session, router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -5,6 +5,7 @@ import DoctorsList from "../../../components/DoctorList";
 export default async function Page() {
   const headerStore = await headers();
   const token = await getToken(headerStore);
+  console.log("token in page.jsx:", token);
 
   let doctors = [];
   try {

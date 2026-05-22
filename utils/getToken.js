@@ -13,9 +13,7 @@ export async function getToken(headerStore) {
         return tokenSession;
 
     } catch (error) {
-
         console.log("AUTH ERROR:", error);
-
         return null;
     }
 }

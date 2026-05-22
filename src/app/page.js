@@ -1,37 +1,15 @@
-"use client";
+
 
 import Home from "./home/page";
-// import { useEffect, useState } from "react";
+import { headers } from "next/headers";
+import { getToken } from "../../utils/getToken";
+import { getSession } from "../../utils/auth-client";
 
-export default function Main() {
-
-  // const [doctors, setDoctors] = useState([]);
-  // const token = "x";
-
-  // useEffect(() => {
-
-  //   const fetchDoctors = async () => {
-
-  //     try {
-
-  //       const res = await fetch(
-  //         `${process.env.NEXT_PUBLIC_API_URL}/allDoctorList`,
-
-  //       );
-
-  //       const data = await res.json();
-
-  //       setDoctors(data?.data || []);
-
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchDoctors();
-
-  // }, []);
-  //  console.log("Doctors in Main:", doctors);
+export default async function Main() {
+  const token =await getToken(await headers())
+  console.log("TOken", token)
+  const tokenx = await getSession.token();
+  console.log("TOkenx", tokenx)
   return (
     <>
       <Home />

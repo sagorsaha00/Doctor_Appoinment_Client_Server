@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { signUp } from "../../../../utils/auth-client";
+import { useState, useEffect } from "react";
+import { signUp, useSession } from "../../../../utils/auth-client";
 import signInGoogle from "../login/page";
 import Image from "next/image";
 import toast from "react-hot-toast";
+
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +15,13 @@ export default function RegisterPage() {
   const [image, setImage] = useState("");
 
   const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.user) {
+      router.push("/home");
+    }
+  }, [session, router]);
 
   const handleRegister = async (e) => {
     e.preventDefault();

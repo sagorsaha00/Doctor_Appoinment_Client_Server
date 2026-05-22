@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { getToken } from "../utils/getToken";
 import { headers } from "next/headers";
@@ -11,7 +12,7 @@ export default function AppointmentForm({ doctor }) {
     appointmentDate: "",
     appointmentTime: "",
   });
-
+   const token = getToken(headers());
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -30,12 +31,17 @@ export default function AppointmentForm({ doctor }) {
     };
     console.log("payload", payload);
     try {
-      const token = getToken(await headers());
+      const headerStore = await headers();
+      const tokenSession = await getToken(headerStore);
+      const token = tokenSession?.token || tokenSession;
+
+      console.log("Token in AppointmentForm:", token);
+
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/CreateAppoinmentUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token?.token || token}`,
+         Authorization: `Bearer ${token}` ,
         },
         body: JSON.stringify(payload),
       });

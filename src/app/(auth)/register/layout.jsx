@@ -1,21 +1,15 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../../../../components/header";
 import Footer from "../../../../components/footer";
-import { useSession } from "../../../../utils/auth-client";
-import { useRouter } from "next/navigation";
 
-export default function Layout({ children }) {
-  const { data: session } = useSession();
-  const router = useRouter();
+export const metadata = {
+  title: "Doctor Appointment - Create Account",
+  description:
+    "Create a new account to book and manage doctor appointments online.",
+  
+};
 
-  useEffect(() => {
-    if (session?.user) {
-      router.push("/home");
-    }
-  }, [session, router]);
-
+export default function RegisterLayout({ children }) {
   return (
     <>
       <Header />
