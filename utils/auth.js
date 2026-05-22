@@ -1,6 +1,8 @@
+ 
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { MongoClient, ServerApiVersion } from "mongodb";
+import { jwt } from "better-auth/plugins"
 import dns from 'node:dns'
 
 dns.setServers(['8.8.8.8', '8.8.4.4'])
@@ -37,6 +39,15 @@ export const auth = betterAuth({
 
     emailAndPassword: {
         enabled: true,
+    },
+    plugins: [jwt()],
+    session: {
+        cookieCache: {
+            enabled: true,
+            strategy: "jwt",
+            maxAge: 60 * 60 * 24 * 7, // 7 days
+        }
+
     },
     baseURL: process.env.BETTER_AUTH_URL,
     socialProviders: {

@@ -1,6 +1,6 @@
-"use client";
-
 import { useState } from "react";
+import { getToken } from "../utils/getToken";
+import { headers } from "next/headers";
 
 export default function AppointmentForm({ doctor }) {
   const [form, setForm] = useState({
@@ -28,11 +28,15 @@ export default function AppointmentForm({ doctor }) {
       appointmentDate: form.appointmentDate,
       appointmentTime: form.appointmentTime,
     };
-      console.log("payload", payload);
+    console.log("payload", payload);
     try {
+      const token = getToken(await headers());
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/CreateAppoinmentUser`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token?.token || token}`,
+        },
         body: JSON.stringify(payload),
       });
 
@@ -54,20 +58,17 @@ export default function AppointmentForm({ doctor }) {
   return (
     <div className="max-w-2xl mx-auto bg-amber-300">
       <div className="bg-white border border-slate-100 shadow-xl rounded-3xl p-8">
-        
-      
         <div className="mb-8 text-center">
           <h2 className="text-2xl font-bold text-slate-900">
             Book Appointment
           </h2>
           <p className="text-slate-500 mt-1">
-            with <span className="text-blue-600 font-medium">{doctor?.name}</span>
+            with{" "}
+            <span className="text-blue-600 font-medium">{doctor?.name}</span>
           </p>
         </div>
 
-     
         <form onSubmit={handleSubmit} className="space-y-5">
-
           <div className="grid md:grid-cols-2 gap-4">
             <input
               type="email"
@@ -133,7 +134,7 @@ export default function AppointmentForm({ doctor }) {
               required
             />
           </div>
- 
+
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-xl"

@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useState, useEffect } from "react";
 import {
   FiMapPin,
   FiClock,
@@ -12,7 +10,6 @@ import {
   FiAward,
   FiStar,
 } from "react-icons/fi";
-import { getSingleData } from "../utils/fetch";
 
 function InfoCard({ icon, label, value }) {
   return (
@@ -26,33 +23,15 @@ function InfoCard({ icon, label, value }) {
   );
 }
 
-export default function SingleDoctor({ id }) {
-  const [doctor, setDoctor] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!id) return;
-
-    async function fetchDoctor() {
-      try {
-        const res = await getSingleData(id);
-        setDoctor(res.data);
-      } catch (err) {
-        console.error("Failed to fetch doctor", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchDoctor();
-  }, [id]);
+export default function SingleDoctor({ doctor }) {
   const handleAppoinment = () => {
     window.location.href = `/appoitment`;
   };
-  if (loading) {
+
+  if (!doctor) {
     return (
       <div className="min-h-screen flex items-center justify-center text-slate-500">
-        Loading doctor details...
+        Doctor not found
       </div>
     );
   }
@@ -95,7 +74,6 @@ export default function SingleDoctor({ id }) {
               </div>
             </div>
 
-        
             <div className="p-8 lg:p-12">
               <span className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium">
                 <FiStar size={14} />
@@ -108,7 +86,6 @@ export default function SingleDoctor({ id }) {
 
               <p className="text-slate-600 mt-5">{doctor.description}</p>
 
-         
               <div className="grid sm:grid-cols-2 gap-4 mt-8">
                 <InfoCard
                   icon={<FiMapPin />}

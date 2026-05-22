@@ -1,26 +1,32 @@
-"use client";
-import { useParams } from "next/navigation";
-import { getSingleData } from "../../../../utils/fetch";
+import { getToken } from "../../../../utils/getToken";
+import { headers } from "next/headers";
 import SingleDoctor from "../../../../components/singleDoctor";
 
-const doctor = {
-  id: "d1",
-  name: "Dr. Ayesha Rahman",
-  specialty: "Cardiologist",
-  image: "https://i.ibb.co/doctor-demo.jpg",
-  experience: "10 years",
-  availability: ["09:00 AM - 12:00 PM", "04:00 PM - 07:00 PM"],
-  description:
-    "Highly experienced cardiologist specializing in heart diseases, preventive care, and patient-centered treatment.",
-  hospital: "Labaid Cardiac Hospital",
-  location: "Dhanmondi, Dhaka",
-  fee: 800,
-};
-
-export default function Page() {
-  const params = useParams();
+export default async function Page({ params }) {
   const doctorId = params.id;
-  console.log("Doctor ID from URL:", doctorId);
+  const headerStore = await headers();
+  const token = await getToken(headerStore);
 
-  return <SingleDoctor id={doctorId} />;
+  let doctor = null;
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/doctor/${doctorId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token?.token || token}`,
+        },
+        cache: "no-store",
+      },
+    );
+    if (response.ok) {
+      const data = await response.json();
+      doctor = data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching doctor:", error);
+  }
+
+  return <SingleDoctor doctor={doctor} />;
 }

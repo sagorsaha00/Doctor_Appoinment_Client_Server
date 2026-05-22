@@ -1,30 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getData } from "../utils/fetch";
 import { FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { getData } from "../utils/fetch"; // adjust path
 
 export default function DoctorsSection() {
+ 
   const router = useRouter();
-  const [doctors, setDoctors] = useState([]);
+  const [displayDoctors, setDisplayDoctors] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchdata = async () => {
       try {
-        const response = await getData();
-        const data = response.data;
-        setDoctors(data.slice(0, 3));
-        console.log("doctorData", data);
+        const doctor = await getData();
+        console.log("Doctors in TopDoctors component:", doctor.data);
+        setDisplayDoctors(doctor.data);
       } catch (error) {
-        console.error("Error fetching doctors data:", error);
+        console.error("Error fetching doctors:", error);
       }
-    }
+    };
 
-    fetchData();
+    fetchdata();
   }, []);
+
+  const displayDoctorsx = displayDoctors.slice(0, 3);
 
   const handleRouter = () => {
     router.push("/allDoctor");
@@ -33,7 +34,6 @@ export default function DoctorsSection() {
   return (
     <section className="py-24 bg-[#f7f5f2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        
         <div className="text-center lg:text-left mb-14">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-[3px]">
             Our Specialists
@@ -45,7 +45,7 @@ export default function DoctorsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {doctors.map((doctor) => (
+          {displayDoctorsx.map((doctor) => (
             <div key={doctor._id} className="group">
               <div className="overflow-hidden rounded-[24px] bg-white">
                 <Image
