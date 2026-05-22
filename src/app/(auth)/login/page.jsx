@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
 import { signIn, authClient, useSession } from "../../../../utils/auth-client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -37,10 +37,12 @@ export default function LoginPage() {
       },
       {
         onRequest: () => {
-          console.log("Loading...");
+          toast.success("Account try to login");
         },
         onSuccess: () => {
           console.log("Login success");
+          toast.success("Login success");
+          router.push("/home");
         },
         onError: (ctx) => {
           toast.error("please try again something wrong");

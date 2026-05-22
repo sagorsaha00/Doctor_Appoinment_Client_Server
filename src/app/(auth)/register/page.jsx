@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import { signUp, useSession } from "../../../../utils/auth-client";
 import signInGoogle from "../login/page";
 import Image from "next/image";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
+
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
