@@ -4,10 +4,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { signUp, useSession } from "../../../../utils/auth-client";
-import signInGoogle from "../login/page";
+import { authClient } from "../../../../utils/auth-client";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
+export const signInGoogle = async () => {
+  console.log("google calling");
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  console.log("Data", data);
+};
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
