@@ -8,7 +8,6 @@ import signInGoogle from "../login/page";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -103,7 +102,8 @@ export default function RegisterPage() {
 
             <input
               type="password"
-              placeholder="Minimum 8 characters"
+              pattern="^(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+              placeholder="Minimum 6 characters "
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full  text-black 0 rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
