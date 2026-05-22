@@ -44,7 +44,7 @@ export default function DashboardProfile({ token }) {
         const data = await response.json();
 
         console.log("data", data);
-        
+
         setAppointments(data.data || []);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -231,14 +231,14 @@ export default function DashboardProfile({ token }) {
                         <div className="flex justify-between mt-4">
                           <button
                             onClick={() => openModal(item)}
-                            className="bg-blue-300 hover:bg-blue-400 text-white py-2 px-4 rounded-lg"
+                            className="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
                           >
                             Update
                           </button>
 
                           <button
                             onClick={() => handleDelete(item)}
-                            className="bg-red-300 hover:bg-red-400 text-white py-2 px-4 rounded-lg"
+                            className="bg-red-500 cursor-pointer hover:bg-red-600 text-white py-2 px-4 rounded-lg"
                           >
                             Delete
                           </button>
