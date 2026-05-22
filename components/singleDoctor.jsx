@@ -10,6 +10,7 @@ import {
   FiAward,
   FiStar,
 } from "react-icons/fi";
+import Loader from "./loading";
 
 function InfoCard({ icon, label, value }) {
   return (
@@ -30,18 +31,11 @@ export default function SingleDoctor({ doctor }) {
 
   if (!doctor) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-slate-500">
-        Doctor not found
-      </div>
+       <Loader></Loader>
     );
   }
 
-  if (!doctor) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
-        Doctor not found
-      </div>
-    );
+  
   }
 
   return (
