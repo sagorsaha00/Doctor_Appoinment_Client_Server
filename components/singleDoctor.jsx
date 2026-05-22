@@ -30,12 +30,7 @@ export default function SingleDoctor({ doctor }) {
   };
 
   if (!doctor) {
-    return (
-       <Loader></Loader>
-    );
-  }
-
-  
+    return <Loader></Loader>;
   }
 
   return (
@@ -43,7 +38,7 @@ export default function SingleDoctor({ doctor }) {
       <div className="max-w-6xl mx-auto px-4">
         <div className="bg-white rounded-[32px] shadow-xl overflow-hidden border border-slate-100">
           <div className="grid lg:grid-cols-2">
-            {/* IMAGE */}
+         
             <div className="relative bg-gradient-to-br from-blue-50 to-cyan-50 p-8 lg:p-10">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
