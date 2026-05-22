@@ -30,9 +30,11 @@ export default function SingleDoctor({ doctor }) {
   };
 
   if (!doctor) {
-    return <div className="h-min-screen">
-      <Loader></Loader>
-    </div>;
+    return (
+      <div className="h-min-screen">
+        <h2>laodin</h2>
+      </div>
+    );
   }
 
   return (
