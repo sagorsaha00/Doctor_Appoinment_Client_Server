@@ -9,6 +9,5 @@ export default async function DashboardPage() {
   const tokenSession = await getToken(headerStore);
   console.log("token", tokenSession);
   const token = tokenSession?.token || tokenSession;
-
   return <DashboardProfile token={token} />;
 }
